@@ -1,0 +1,31 @@
+# VHSFin for podman compose
+services:
+  vhsfin:
+    image: localhost/vhsfin:latest
+    container_name: vhsfin
+    build:
+      context: .
+      dockerfile: Containerfile
+      args:
+        VHSFIN_REF: main          # or pin tag/commit
+        VHSCOLLECTOR: "false"     # "true" = compile VHSCollector-cover-search in
+        DEMO: "false"             # "true" = demo shelves without JellyFin
+    environment:
+      VHSFIN_PORT: "8080"
+    ports:
+      - "8080:8080"               # only local for caddy: "127.0.0.1:8080:8080"
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/ia/health', timeout=4)"]
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+      retries: 3
+
