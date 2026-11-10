@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="VHSFin">
-  <rect width="100" height="100" fill="#1A100C"/>
+  <!-- <rect width="100" height="100" fill="#1A100C"/> -->
   <!-- Cassette footprint ~1.81:1, centered -->
   <g transform="translate(6.5,26.2)">
     <defs>
